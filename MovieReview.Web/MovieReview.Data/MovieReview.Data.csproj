@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="EFRepository.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieReview.cs" />
     <Compile Include="MovieReviewDbContext.cs" />
