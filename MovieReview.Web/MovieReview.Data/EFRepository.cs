@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace MovieReview.Data
 {
-    public class EFRepository<T>: IRepository<T> where T: class
+    public class EFRepository<T> : IRepository<T> where T : class
     {
         public EFRepository(DbContext dbContext)
         {
             if (dbContext == null)
-            {
                 throw new ArgumentNullException("dbContext");
-            }
             DbContext = dbContext;
             DbSet = DbContext.Set<T>();
         }
@@ -56,7 +54,7 @@ namespace MovieReview.Data
             dbEntityEntry.State = EntityState.Modified;
         }
 
-        public virtual void Delete(T entity)
+        public void Delete(T entity)
         {
             DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
             if (dbEntityEntry.State != EntityState.Deleted)
@@ -72,9 +70,10 @@ namespace MovieReview.Data
 
         public void Delete(int id)
         {
-            var entity = this.GetById(id);
+            var entity = GetById(id);
             if (entity == null) return;
-            this.Delete(entity);
+
+            Delete(entity);
         }
     }
 }

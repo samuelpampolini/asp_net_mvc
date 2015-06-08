@@ -10,21 +10,22 @@ using System.Threading.Tasks;
 
 namespace MovieReview.Data
 {
-    public class MovieReviewDbContext: DbContext
+    public class MovieReviewDbContext : DbContext
     {
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<MoviesReview> MovieReviews { get; set; }
 
         public MovieReviewDbContext() : base(nameOrConnectionString: "MoviesReviewProd") { }
 
-        //invoke this to seed defailt values for the 1st run
-        //comment the initializer code in production
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<MoviesReview> MovieReviews { get; set; }
+
+        //invoke this to seed default values for the 1st run
+        //comment the intializer code in production
         static MovieReviewDbContext()
         {
             Database.SetInitializer(new MovieReviewDatabaseInitializer());
         }
 
-        //setting EF Conventions
+        //setting EF Convetions
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //use singular table names
