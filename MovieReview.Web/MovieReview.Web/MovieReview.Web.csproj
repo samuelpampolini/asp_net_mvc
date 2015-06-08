@@ -286,6 +286,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MovieReview.Data.Contracts\MovieReview.Data.Contracts.csproj">
+      <Project>{8d7ee385-53bd-49e3-a7f9-f19d2d61f9a1}</Project>
+      <Name>MovieReview.Data.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieReview.Data\MovieReview.Data.csproj">
       <Project>{03e5f32b-5ca7-4fab-a33d-8e812fa51adf}</Project>
       <Name>MovieReview.Data</Name>
