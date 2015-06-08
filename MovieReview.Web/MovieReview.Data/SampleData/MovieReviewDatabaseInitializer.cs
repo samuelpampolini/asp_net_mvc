@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieReview.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -21,8 +22,8 @@ namespace MovieReview.Data.SampleData
                     MovieName = "Godzilla",
                     DirectorName = "Gareth Edwards",
                     ReleaseYear = "2004",
-                    Reviews = new List<MovieReview> {
-                    new MovieReview {ReviewerRating=5,ReviewerComments="Excellent", ReviewerName="Rahul Sahay"}
+                    Reviews = new List<MoviesReview> {
+                    new MoviesReview {ReviewerRating=5,ReviewerComments="Excellent", ReviewerName="Rahul Sahay"}
                 }
                 });
         }

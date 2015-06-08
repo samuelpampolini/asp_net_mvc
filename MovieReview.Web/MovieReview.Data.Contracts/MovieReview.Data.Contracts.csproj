@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{03E5F32B-5CA7-4FAB-A33D-8E812FA51ADF}</ProjectGuid>
+    <ProjectGuid>{8D7EE385-53BD-49E3-A7F9-F19D2D61F9A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieReview.Data</RootNamespace>
-    <AssemblyName>MovieReview.Data</AssemblyName>
+    <RootNamespace>MovieReview.Data.Contracts</RootNamespace>
+    <AssemblyName>MovieReview.Data.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,16 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,28 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFRepository.cs" />
-    <Compile Include="Helpers\IRepositoryProvider.cs" />
-    <Compile Include="MovieReviewDbContext.cs" />
-    <Compile Include="MovieReviewUow.cs" />
+    <Compile Include="IMovieReviewUow.cs" />
+    <Compile Include="Irepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleData\MovieReviewDatabaseInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MovieReview.Data.Contracts\MovieReview.Data.Contracts.csproj">
-      <Project>{8d7ee385-53bd-49e3-a7f9-f19d2d61f9a1}</Project>
-      <Name>MovieReview.Data.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MoviewReview.Model\MoviewReview.Model.csproj">
       <Project>{3ee24316-2207-4ea6-a60e-3278ed317955}</Project>
       <Name>MoviewReview.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

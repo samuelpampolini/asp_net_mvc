@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieReview.Data
+namespace MovieReview.Model
 {
-    public class MovieReview
+    public class MoviesReview
     {
         public int Id { get; set; }
         public string ReviewerName { get; set; }

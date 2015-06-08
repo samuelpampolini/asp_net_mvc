@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieReview.Data
+namespace MovieReview.Model
 {
     public class Movie
     {
@@ -12,6 +12,6 @@ namespace MovieReview.Data
         public string MovieName { get; set; }
         public string DirectorName { get; set; }
         public string ReleaseYear { get; set; }
-        public virtual ICollection<MovieReview> Reviews { get; set; }
+        public virtual ICollection<MoviesReview> Reviews { get; set; }
     }
 }

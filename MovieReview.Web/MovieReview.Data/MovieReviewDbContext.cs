@@ -1,4 +1,5 @@
 ﻿using MovieReview.Data.SampleData;
+using MovieReview.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,7 +13,7 @@ namespace MovieReview.Data
     public class MovieReviewDbContext: DbContext
     {
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<MovieReview> MovieReviews { get; set; }
+        public DbSet<MoviesReview> MovieReviews { get; set; }
 
         public MovieReviewDbContext() : base(nameOrConnectionString: "MoviesReviewProd") { }
 
