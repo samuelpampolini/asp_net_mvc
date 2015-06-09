@@ -46,8 +46,11 @@ namespace MovieReview.Web.Controllers
         }
 
         // DELETE: api/Movies/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            Uow.Movies.Delete(id);
+            Uow.Commit();
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
     }
 }
