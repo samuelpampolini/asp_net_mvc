@@ -34,8 +34,11 @@ namespace MovieReview.Web.Controllers
         }
 
         // PUT: api/Movies/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put([FromBody]Movie movie)
         {
+            Uow.Movies.Update(movie);
+            Uow.Commit();
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Movies/5
