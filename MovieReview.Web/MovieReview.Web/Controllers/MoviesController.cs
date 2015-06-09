@@ -29,8 +29,12 @@ namespace MovieReview.Web.Controllers
         }
 
         // POST: api/Movies
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]Movie movie)
         {
+            Uow.Movies.Add(movie);
+            Uow.Commit();
+
+            return Request.CreateResponse(HttpStatusCode.Created, movie);
         }
 
         // PUT: api/Movies/5
