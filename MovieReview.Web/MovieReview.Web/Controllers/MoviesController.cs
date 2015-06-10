@@ -1,5 +1,6 @@
 ﻿using MovieReview.Data.Contracts;
 using MovieReview.Model;
+using MoviewReview.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,25 @@ namespace MovieReview.Web.Controllers
         }
 
         // GET: api/Movies
-        public IEnumerable<Movie> Get()
+        public IQueryable Get()
         {
-            return Uow.Movies.GetAll().OrderBy(s => s.MovieName);
+            var model = Uow.Movies.GetAll().OrderByDescending(m => m.Reviews.Count()).Select(m => new MovieViewModel
+            {
+                Id = m.Id,
+                MovieName = m.MovieName,
+                DirectorName = m.DirectorName,
+                ReleaseYear = m.ReleaseYear,
+                NoOfReviews = m.Reviews.Count()
+            });
+            return model;
         }
 
         // GET: api/Movies/5
-        public string Get(int id)
+        public Movie Get(int id)
         {
-            return "value";
+            var movie = Uow.Movies.GetById(id);
+            if (movie != null) return movie;
+            throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
         }
 
         // POST: api/Movies
