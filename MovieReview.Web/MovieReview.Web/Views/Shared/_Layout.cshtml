@@ -9,31 +9,72 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header id="top">
+        <nav class="navbar navbar-inverse navbar-fixed-top cbp-af-header"
+             role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#top">
+                        <img src="~/images/rsz_movie-review.png" />
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#/">Home</a></li>
+                        <li><a href="#/movies">Movies</a></li>
+                        <li><a href="#/aboutapp">About APP</a></li>
+                        <!--<li><a href="#activities">Activities</a></li>-->
+                        <li><a href="#/contactme">Contact Me</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+    </header>
+
+
+    <div class="container-fluid">
+
+        <section class="row title-row">
+
+            <div class="stellar-bg"
+                 style="background-image: url(../../images/movie-background.jpg); height: 550px; background-size:cover"
+                 data-stellar-background-ratio="0.2">
+                <div class="down-button">
+                    <a class="btn" href="#sights">
+                        <i class="fa fa-arrow-circle-down fa-3x" style="color: black"></i>
+                    </a>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+        </section>
+
+        <section id="sights" class="row text-banner">
+            <div>
+                @RenderBody()
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="container-fluid">
+        <div class="row">
+            <div id="copyright">
+
+                &copy; <a href="http://samuelpampolini.com.br"> Book test </a> All rights reserved
+
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

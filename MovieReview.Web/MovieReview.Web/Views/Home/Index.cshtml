@@ -1,22 +1,24 @@
 ﻿<div ng-controller="homeIndexController">
-    <table class="table table-hover table-striped table-condensed table-bordered">
-        <thead>
-            <tr>
-                <th>Movie Name</th>
-                <th>Director Name</th>
-                <th>Release Year</th>
-                <th>Reviews</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="i in data" class="repeat-animation">
-                <td>{{i.MovieName}}</td>
-                <td>{{i.DirectorName}}</td>
-                <td>{{i.ReleaseYear}}</td>
-                <td>{{i.Reviews}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <table class="table table-hover table-striped table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>Movie Name</th>
+                    <th>Director Name</th>
+                    <th>Release Year</th>
+                    <th>Reviews</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in data" class="repeat-animation">
+                    <td>{{i.MovieName}}</td>
+                    <td>{{i.DirectorName}}</td>
+                    <td>{{i.ReleaseYear}}</td>
+                    <td>{{i.NoOfReviews}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section scripts{
