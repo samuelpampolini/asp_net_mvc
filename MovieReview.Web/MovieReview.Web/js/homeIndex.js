@@ -5,6 +5,9 @@ var homeIndexController = function ($scope, $http) {
     //empty collection
     $scope.data = [];
 
+    //Making Spinner On
+    $("#loader").show();
+
     //API Call
     $http.get("/api/movies")
         .then(function (result) {
@@ -15,7 +18,10 @@ var homeIndexController = function ($scope, $http) {
             //Error
             //To Do: Will change logging technique later using toastr lib
             console.log("Couldn't Fetch the Data");
+        }).then(function () {
+            $("#loader").hide();
         });
+
 }
 
 myApp.controller("homeIndexController", homeIndexController)
