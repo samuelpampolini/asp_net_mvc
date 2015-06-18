@@ -1,16 +1,6 @@
 ﻿var module = angular.module("homeIndex", ["ngRoute"]);
 
-module.config(["$routeProvider", function ($routeProvider) {
-    $routeProvider.when("/", {
-        controller: "homeIndexController",
-        templateUrl: "/templates/home.html"
-    });
-
-    //Default back to home page, if couldn't find the path specified
-    $routeProvider.otherwise({ redirectoTo: "/" });
-}]);
-
-var homeIndexController = function ($scope, $http) {
+module.controller('homeIndexController', function ($scope, $http) {
     $scope.count = 0;
     //empty collection
     $scope.data = [];
@@ -32,4 +22,14 @@ var homeIndexController = function ($scope, $http) {
             $("#loader").hide();
         });
 
-}
+})
+
+module.config(["$routeProvider", function ($routeProvider) {
+    $routeProvider.when("/", {
+        controller: "homeIndexController",
+        templateUrl: "/templates/home.html"
+    });
+
+    //Default back to home page, if couldn't find the path specified
+    $routeProvider.otherwise({ redirectoTo: "/" });
+}]);
