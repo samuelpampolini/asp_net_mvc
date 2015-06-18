@@ -7,11 +7,16 @@ module.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "/templates/home.html"
     });
 
+    $routeProvider.when("/movies", {
+        controller: "homeIndexController",
+        templateUrl: "/templates/movies.html"
+    });
+
     //Default back to home page, if couldn't find the path specified
     $routeProvider.otherwise({ redirectoTo: "/" });
 }]);
 
-var homeIndexController = function ($scope, $http) {
+var homeIndexController = ["$scope", "$http", function ($scope, $http) {
     $scope.count = 0;
     //empty collection
     $scope.data = [];
@@ -33,6 +38,6 @@ var homeIndexController = function ($scope, $http) {
             $("#loader").hide();
         });
 
-}
+}]
 
-module.controller('homeIndexController', homeIndexController)
+module.controller('homeIndexController', homeIndexController);
