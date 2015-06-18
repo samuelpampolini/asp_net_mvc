@@ -12,6 +12,11 @@ module.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "/templates/movies.html"
     });
 
+    $routeProvider.when("/newMovie", {
+        controller: "newMovieController",
+        templateUrll: "/templates/newMovie.html"
+    });
+
     //Default back to home page, if couldn't find the path specified
     $routeProvider.otherwise({ redirectoTo: "/" });
 }]);
@@ -41,3 +46,4 @@ var homeIndexController = ["$scope", "$http", function ($scope, $http) {
 }]
 
 module.controller('homeIndexController', homeIndexController);
+module.controller('newMovieController', function ($scope) { });
