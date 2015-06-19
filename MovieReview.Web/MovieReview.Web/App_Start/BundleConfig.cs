@@ -22,10 +22,13 @@ namespace MovieReview.Web
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular.min.js",
-                        "~/Scripts/angular-route.js"));
+                        "~/Scripts/angular-route.js",
+                        "~/Scripts/toastr.js"
+                        ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"));
         }
     }

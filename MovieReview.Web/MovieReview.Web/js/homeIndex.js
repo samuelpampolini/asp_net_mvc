@@ -43,7 +43,26 @@ var homeIndexController = ["$scope", "$http", function ($scope, $http) {
             $("#loader").hide();
         });
 
-}]
+}];
+
+var newMovieController = ["$scope", "$http", "$window", function ($scope, $http, $window) {
+    $scope.newMovie = {};
+    $scope.save = function () {
+
+        $http.post("/api/movies", $scope.newMovie)
+            .then(function (result) {
+                var newMovie = result.data;
+                toastr.success("Filme salvo com sucesso!");
+
+                //once saved succssfully return tothe movies page
+                $window.location = "#/movies";
+            }, function () {
+                toastr.error("Não foi possível salvar o filme.")
+            });
+
+        toastr.success("Filme salvo com sucesso!");
+    };
+}];
 
 module.controller('homeIndexController', homeIndexController);
-module.controller('newMovieController', function ($scope) { });
+module.controller('newMovieController', newMovieController);
