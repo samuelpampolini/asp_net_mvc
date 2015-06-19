@@ -14,7 +14,7 @@ module.config(["$routeProvider", function ($routeProvider) {
 
     $routeProvider.when("/newMovie", {
         controller: "newMovieController",
-        templateUrll: "/templates/newMovie.html"
+        templateUrl: "/templates/newMovie.html"
     });
 
     //Default back to home page, if couldn't find the path specified
