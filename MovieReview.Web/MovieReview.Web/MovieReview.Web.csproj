@@ -307,6 +307,7 @@
     <Content Include="Scripts\angular-sanitize.js" />
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular-ui-bootstrap.min.js" />
     <Content Include="templates\home.html" />
     <Content Include="templates\movies.html" />
     <Content Include="templates\newMovie.html" />

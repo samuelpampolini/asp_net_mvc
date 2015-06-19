@@ -23,6 +23,7 @@ namespace MovieReview.Web
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular.min.js",
                         "~/Scripts/angular-route.js",
+                        "~/Scripts/angular-ui-bootstrap.min.js",
                         "~/Scripts/toastr.js"
                         ));
 

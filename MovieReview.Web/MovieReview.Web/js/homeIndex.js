@@ -1,4 +1,4 @@
-﻿var module = angular.module("homeIndex", ["ngRoute"]);
+﻿var module = angular.module("homeIndex", ["ngRoute", "ui.bootstrap"]);
 
 
 module.config(["$routeProvider", function ($routeProvider) {
@@ -21,28 +21,51 @@ module.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.otherwise({ redirectoTo: "/" });
 }]);
 
-var homeIndexController = ["$scope", "$http", function ($scope, $http) {
+module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
+    var _movies = [];
+
+    var _getMovies = function () {
+        var deferred = $q.defer();
+        $http.get("/api/movies")
+        .then(function (result) {
+            //Success
+            //angular.copy copies the collection from source to destination
+            angular.copy(result.data, _movies);
+            deferred.resolve();
+        }, function () {
+            //Error
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+    //make available below properties for other parts of angular to use
+    return {
+        movies: _movies,
+        getMovies: _getMovies
+    };
+}]);
+
+var homeIndexController = ["$scope", "$http", "dataServiceFactory", function ($scope, $http, dataServiceFactory) {
     $scope.count = 0;
     //empty collection
-    $scope.data = [];
+    $scope.data = dataServiceFactory;
 
     //Making Spinner On
     $("#loader").show();
 
-    //API Call
-    $http.get("/api/movies")
+    dataServiceFactory.getMovies()
         .then(function (result) {
             //Success
-            //angular.copy copies the collection from source to destination
-            angular.copy(result.data, $scope.data);
+            toastr.success("Filmes carregados com sucesso.")
         }, function () {
             //Error
             //To Do: Will change logging technique later using toastr lib
-            console.log("Couldn't Fetch the Data");
+            toastr.success("Erro ao carregar os filmes")
         }).then(function () {
             $("#loader").hide();
         });
-
 }];
 
 var newMovieController = ["$scope", "$http", "$window", function ($scope, $http, $window) {
