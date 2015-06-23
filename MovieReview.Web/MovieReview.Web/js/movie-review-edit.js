@@ -27,6 +27,18 @@ var movieEditController = ["$scope", "dataServiceFactory", "$window", "$routePar
             //Error
             toastr.error("Error Fetching Movie with Id:", $routeParams.Id);
         });
+
+    $scope.editMovie = function () {
+        dataServiceFactory.movieEdit($scope.movie)
+            .then(function () {
+                //Success
+                toastr.success("Filme atualizado com sucesso.");
+                $window.location = "#/movies";
+            }, function () {
+                //Error
+                toastr.error("Erro ao atualizar o filme.")
+            });
+    };
 }];
 
 module.controller("movieEditController", movieEditController);

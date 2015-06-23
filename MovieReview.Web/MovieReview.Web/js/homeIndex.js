@@ -53,13 +53,28 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
             })
 
         return deferred.promise;
-    }
+    };
+
+    var _movieEdit = function (movie) {
+        var deferred = $q.defer();
+        $http.put("/api/movies", movie)
+            .then(function () {
+                //Success
+                deferred.resolve();
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
 
     //make available below properties for other parts of angular to use
     return {
         movies: _movies,
         getMovies: _getMovies,
-        getMovieById: _getMovieById
+        getMovieById: _getMovieById,
+        movieEdit: _movieEdit
     };
 }]);
 
