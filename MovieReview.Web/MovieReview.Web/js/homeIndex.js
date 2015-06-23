@@ -1,4 +1,4 @@
-﻿var module = angular.module("homeIndex", ["ngRoute", "ui.bootstrap"]);
+﻿var module = angular.module("homeIndex", ["ngRoute", "ui.bootstrap", "movieReviewEdit"]);
 
 
 module.config(["$routeProvider", function ($routeProvider) {
@@ -40,10 +40,26 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         return deferred.promise;
     };
 
+    var _getMovieById = function (Id) {
+        var deferred = $q.defer();
+        $http.get("/api/movies/" + Id)
+            .then(function (result) {
+                //Success
+                //result.data will return the data back to the caller
+                deferred.resolve(result.data);
+            }, function () {
+                //Error
+                deferrer.reject();
+            })
+
+        return deferred.promise;
+    }
+
     //make available below properties for other parts of angular to use
     return {
         movies: _movies,
-        getMovies: _getMovies
+        getMovies: _getMovies,
+        getMovieById: _getMovieById
     };
 }]);
 
