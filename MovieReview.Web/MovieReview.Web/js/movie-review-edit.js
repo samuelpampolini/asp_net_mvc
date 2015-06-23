@@ -39,6 +39,18 @@ var movieEditController = ["$scope", "dataServiceFactory", "$window", "$routePar
                 toastr.error("Erro ao atualizar o filme.")
             });
     };
+
+    $scope.deleteMovie = function () {
+        dataServiceFactory.removeMovie($scope.movie.Id)
+            .then(function () {
+                //Success
+                toastr.success("Filme apagado com sucesso.");
+                $window.location = "/#movies";
+            }, function () {
+                //Error
+                toastr.erro("Erro ao apagar o filme.")
+            });
+    };
 }];
 
 module.controller("movieEditController", movieEditController);
