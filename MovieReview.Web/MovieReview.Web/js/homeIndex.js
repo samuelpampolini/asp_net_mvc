@@ -201,7 +201,8 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         getReviewById: _getReviewById,
         addReview: _addReview,
         getReviewByReviewerId: _getReviewByReviewerId,
-        updateReview: _updateReview
+        updateReview: _updateReview,
+        removeReview: _removeReview
     };
 }]);
 
