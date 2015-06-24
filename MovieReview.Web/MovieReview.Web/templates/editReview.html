@@ -1,0 +1,54 @@
+﻿<form class="form-horizontal" name="editReviewForm" novalidate role="form" ng-submit="editReview()">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><b>Edit Review</b></div>
+        <div class="panel-body">
+            <fieldset>
+                <div class="form-group" style="display:none;">
+                    <label for="ReviewId" class="col-sm-3 control-label">Review Id</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="ReviewId" name="ReviewId" class="form-control" value="{{review.Id}}" />
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': editReviewForm.ReviewerName.$invalid}">
+                    <label for="ReviewerName" class=" col-sm-3 control-label">Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ReviewerName" name="ReviewerName" class="form-control" ng-model="review.ReviewerName" required ng-minlength="5" />
+                        <span class="help-block" ng-show="editReviewForm.ReviewerName.$error.required"><i class="fa fa-star"></i></span>
+                        <span class="input-validation-error" ng-show="editReviewForm.ReviewerName.$error.minlength">Por favor informe pelo menos 5 caracteres.</span>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': editReviewForm.ReviewerComments.$invalid}">
+                    <label for="ReviewerComments" class=" col-sm-3 control-label">Comments</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ReviewerComments" name="ReviewerComments" class="form-control" ng-model="review.ReviewerComments" required ng-minlength="15" />
+                        <span class="help-block" ng-show="editReviewForm.ReviewerComments.$error.required"><i class="fa fa-star"></i></span>
+                        <span class="input-validation-error" ng-show="editReviewForm.ReviewerComments.$error.minlength">Por favor informe pelo menos 15 caracteres.</span>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': editReviewForm.ReviewerRating.$invalid}">
+                    <label for="ReviewerRating" class="col-sm-3 control-label">Rating</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ReviewerRating" name="ReviewerRating" class="form-control" ng-model="review.ReviewerRating" required ng-pattern="/^[0-5]$/" />
+                        <span class="help-block" ng-show="editReviewForm.ReviewerRating.$error.required"><i class="fa fa-star"></i></span>
+                        <span class="input-validation-error" ng-show="editReviewForm.ReviewerComments.$error.pattern">Por favor informe entre 1 e 5.</span>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <button type="submit" id="updateReview" value="updateReview" ng-disabled="editReviewForm.$invalid">
+                        <i class="fa fa-plus btn btn-primary"> Update Review</i>
+                    </button>
+                    <button type="button" id="deleteReview" value="deleteReview" data-ng-click="deleteReview()">
+                        <i class="fa fa-plus btn btn-danger"> Delete Review</i>
+                    </button>
+                    <button type="button" id="cancelMovie" value="cancelReview" ng-click="cancelReview()">
+                        <i class="fa fa-undo btn btn-link">Cancel</i>
+                    </button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>

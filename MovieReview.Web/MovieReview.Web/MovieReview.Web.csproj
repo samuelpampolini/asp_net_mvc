@@ -310,6 +310,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular-ui-bootstrap.min.js" />
     <Content Include="templates\editMovie.html" />
+    <Content Include="templates\editReview.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\movies.html" />
     <Content Include="templates\newMovie.html" />

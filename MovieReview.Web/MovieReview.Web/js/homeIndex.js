@@ -27,6 +27,11 @@ module.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "/templates/newReview.html"
     });
 
+    $routeProvider.when("/editReview/:Id", {
+        controller: "reviewEditController",
+        templateUrl: "/templates/editReview.html"
+    });
+
     //Default back to home page, if couldn't find the path specified
     $routeProvider.otherwise({ redirectoTo: "/" });
 }]);
@@ -142,6 +147,49 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         return deferred.promise;
     };
 
+    var _getReviewByReviewerId = function (Id) {
+        var deferred = $q.defer();
+
+        $http.get("/api/Lookups/getbyreviewerid?id=" + Id)
+            .then(function (result) {
+                deferred.resolve(result.data);
+            }, function () {
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
+    var _updateReview = function (review) {
+        var deferred = $q.defer();
+
+        $http.put("/api/MovieReviews/", review)
+            .then(function () {
+                //Success
+                deferred.resolve();
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
+    var _removeReview = function (Id) {
+        var deferred = $q.defer();
+
+        $http.delete("/api/MovieReviews/" + Id)
+            .then(function () {
+                //Success
+                deferred.resolve();
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
     //make available below properties for other parts of angular to use
     return {
         movies: _movies,
@@ -151,7 +199,9 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         removeMovie: _removeMovie,
         getReviews: _getReviews,
         getReviewById: _getReviewById,
-        addReview: _addReview
+        addReview: _addReview,
+        getReviewByReviewerId: _getReviewByReviewerId,
+        updateReview: _updateReview
     };
 }]);
 
@@ -255,7 +305,47 @@ var newReviewController = ["$scope", "$routeParams", "$window", "dataServiceFact
     };
 }];
 
+var reviewEditController = ["$scope", "dataServiceFactory", "$window", "$routeParams", function ($scope, dataServiceFactory, $window, $routeParams) {
+    $scope.review = null;
+    $scope.newReview = {};
+
+    //Fetching the Review by id and setting $scope.review
+    dataServiceFactory.getReviewByReviewerId($routeParams.Id)
+        .then(function (result) {
+            $scope.review = result;
+        }, function () {
+            toastr.error("Não foi possível recuperar o review.")
+        });
+
+    //Edditing the Review
+    $scope.editReview = function () {
+        dataServiceFactory.updateReview($scope.review)
+            .then(function () {
+                //success
+                toastr.success("Review atualizado com sucesso.");
+                $window.location = "#/movies";
+            }, function () {
+                //error
+                toastr.error("Erro ao salvar o review.");
+            });
+    };
+
+    //Deleting the review
+    $scope.deleteReview = function () {
+        dataServiceFactory.removeReview($scope.review.Id)
+            .then(function () {
+                //Success
+                toastr.success("Review excluído com sucesso.");
+                $window.location = "#/movies";
+            }, function () {
+                //Error
+                toastr.error("Erro ao excluir o review de Id: " + $scope.review.Id);
+            });
+    };
+}];
+
 module.controller('homeIndexController', homeIndexController);
 module.controller('newMovieController', newMovieController);
 module.controller('reviewsController', reviewsController);
 module.controller('newReviewController', newReviewController);
+module.controller('reviewEditController', reviewEditController);
