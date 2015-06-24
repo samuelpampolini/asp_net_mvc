@@ -17,12 +17,18 @@ module.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "/templates/newMovie.html"
     });
 
+    $routeProvider.when("/reviews/:Id", {
+        controller: "reviewsController",
+        templateUrl: "/templates/reviews.html"
+    });
+
     //Default back to home page, if couldn't find the path specified
     $routeProvider.otherwise({ redirectoTo: "/" });
 }]);
 
 module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
     var _movies = [];
+    var _reviews = [];
 
     var _getMovies = function () {
         var deferred = $q.defer();
@@ -82,13 +88,49 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         return deferred.promise;
     };
 
+    var _getReviews = function (Id) {
+        var deferred = $q.defer();
+
+        $http.get("/api/MovieReviews/" + Id)
+            .then(function (result) {
+                //Success
+                angular.copy(result.data, _reviews);
+                deferred.resolve();
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
+    var _getReviewById = function (Id) {
+        var deferred = $q.defer();
+        _getReviews(Id)
+            .then(function () {
+                //success
+                if (_reviews) {
+                    deferred.resolve(_reviews);
+                } else {
+                    deferred.reject();
+                }
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
     //make available below properties for other parts of angular to use
     return {
         movies: _movies,
         getMovies: _getMovies,
         getMovieById: _getMovieById,
         movieEdit: _movieEdit,
-        removeMovie: _removeMovie
+        removeMovie: _removeMovie,
+        getReviews: _getReviews,
+        getReviewById: _getReviewById
     };
 }]);
 
@@ -132,5 +174,42 @@ var newMovieController = ["$scope", "$http", "$window", function ($scope, $http,
     };
 }];
 
+var reviewsController = ["$scope", "$routeParams", "$window", "dataServiceFactory", function ($scope, $routeParams, $window, dataServiceFactory) {
+    $scope.reviews = null;
+    $scope.MovieId = null;
+
+    $("#loader").show();
+
+    dataServiceFactory.getReviewById($routeParams.Id)
+        .then(function (review) {
+            //Success
+            //For pagination
+            $scope.currentPage = 1;
+            $scope.numPerPage = 4;
+            $scope.maxSize = 5;
+
+            $scope.numPages = function () {
+                return Math.ceil(review.length / $scope.numPerPage);
+            };
+
+            $scope.$watch("currentPage + numPerPage", function () {
+                var begin = (($scope.currentPage - 1) * $scope.numPerPage),
+                    end = begin + $scope.numPerPage;
+                $scope.filteredReviews = review.slice(begin, end);
+            });
+
+            $scope.reviews = review;
+            $scope.MovieId = $routeParams.Id;
+            toastr.success("Reviews carregados com sucesso.")
+        }, function () {
+            //Error
+            toastr.error("Erro ao carregar os reviews.");
+        })
+        .then(function () {
+            $("#loader").hide();
+        });
+}];
+
 module.controller('homeIndexController', homeIndexController);
 module.controller('newMovieController', newMovieController);
+module.controller('reviewsController', reviewsController);

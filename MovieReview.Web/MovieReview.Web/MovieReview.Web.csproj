@@ -313,6 +313,7 @@
     <Content Include="templates\home.html" />
     <Content Include="templates\movies.html" />
     <Content Include="templates\newMovie.html" />
+    <Content Include="templates\reviews.html" />
     <Content Include="WebApiTests\movieapi.js" />
     <Content Include="WebApiTests\MoviesAPI.html" />
     <Content Include="WebApiTests\qunit-utils.js" />
