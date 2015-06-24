@@ -22,6 +22,11 @@ module.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "/templates/reviews.html"
     });
 
+    $routeProvider.when("/newReview/:Id", {
+        controller: "newReviewController",
+        templateUrl: "/templates/newReview.html"
+    });
+
     //Default back to home page, if couldn't find the path specified
     $routeProvider.otherwise({ redirectoTo: "/" });
 }]);
@@ -122,6 +127,21 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         return deferred.promise;
     };
 
+    var _addReview = function (MovieId, newReview) {
+        var deferred = $q.defer();
+
+        $http.post("/api/MovieReviews/" + MovieId, newReview)
+            .then(function () {
+                //Success
+                deferred.resolve();
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
     //make available below properties for other parts of angular to use
     return {
         movies: _movies,
@@ -130,7 +150,8 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
         movieEdit: _movieEdit,
         removeMovie: _removeMovie,
         getReviews: _getReviews,
-        getReviewById: _getReviewById
+        getReviewById: _getReviewById,
+        addReview: _addReview
     };
 }]);
 
@@ -210,6 +231,31 @@ var reviewsController = ["$scope", "$routeParams", "$window", "dataServiceFactor
         });
 }];
 
+var newReviewController = ["$scope", "$routeParams", "$window", "dataServiceFactory", function ($scope, $routeParams, $window, dataServiceFactory) {
+    $scope.ReviewerRating = 3;
+    $scope.max = 5;
+    $scope.isReadonly = false;
+    $scope.MovieId = null;
+    $scope.newReview = {};
+
+    $scope.cancelReview = function () {
+        $window.history.back();
+    };
+
+    $scope.saveReview = function () {
+        dataServiceFactory.addReview($routeParams.Id, $scope.newReview)
+            .then(function () {
+                //Success
+                toastr.success("Obrigado pelo seu feedback!");
+                $window.location = "#/movies";
+            }, function () {
+                //Error
+                toastr.error("Não foi possível savar o novo review.");
+            });
+    };
+}];
+
 module.controller('homeIndexController', homeIndexController);
 module.controller('newMovieController', newMovieController);
 module.controller('reviewsController', reviewsController);
+module.controller('newReviewController', newReviewController);
