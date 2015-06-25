@@ -78,4 +78,25 @@ describe("home-Index Tests-->", function () {
             expect(dataServiceFactory.movies.length).toEqual(5);
         }));
     });
+
+    describe("Testing Home-Index Controller-->", function () {
+
+        it("Load Movies", inject(function ($controller, $http, dataServiceFactory) {
+
+            var scopeObj = {};
+
+            $httpBackend.expectGET(url);
+
+            var ctrl = $controller("homeIndexController", {
+                $scope: scopeObj,
+                $http: $http,
+                dataServiceFactory: dataServiceFactory
+            });
+
+            dataServiceFactory.getMovies();
+            $httpBackend.flush();
+            expect(ctrl).not.toBeNull();
+            expect(scopeObj.data).toBeDefined();
+        }));
+    });
 });

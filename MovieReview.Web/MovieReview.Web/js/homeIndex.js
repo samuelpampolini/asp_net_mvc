@@ -1,5 +1,7 @@
-﻿var module = angular.module("homeIndex", ["ngRoute", "ui.bootstrap", "movieReviewEdit"]);
+﻿/// <reference path="../scripts/jquery-2.1.4.min.js" />
+/// <reference path="../scripts/toastr.js" />
 
+var module = angular.module("homeIndex", ["ngRoute", "ui.bootstrap", "movieReviewEdit"]);
 
 module.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.when("/", {
