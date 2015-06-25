@@ -193,6 +193,7 @@ module.factory("dataServiceFactory", ["$http", "$q", function ($http, $q) {
     //make available below properties for other parts of angular to use
     return {
         movies: _movies,
+        reviews: _reviews,
         getMovies: _getMovies,
         getMovieById: _getMovieById,
         movieEdit: _movieEdit,
