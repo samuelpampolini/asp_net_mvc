@@ -298,6 +298,7 @@
     <Content Include="images\site-logo-white-70pct.png" />
     <Content Include="images\site-logo-white.png" />
     <Content Include="images\snowboarder.jpg" />
+    <Content Include="js\appJSTest.js" />
     <Content Include="js\homeIndex.js" />
     <Content Include="js\movie-review-edit.js" />
     <Content Include="Scripts\angular-animate.js" />
