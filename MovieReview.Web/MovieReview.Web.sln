@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviewReview.Model", "Movie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieReview.Data.Contracts", "MovieReview.Data.Contracts\MovieReview.Data.Contracts.csproj", "{8D7EE385-53BD-49E3-A7F9-F19D2D61F9A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviewReview.Tests", "MoviewReview.Tests\MoviewReview.Tests.csproj", "{27B7F4DA-6B75-4AE8-8944-40253145A47C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8D7EE385-53BD-49E3-A7F9-F19D2D61F9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D7EE385-53BD-49E3-A7F9-F19D2D61F9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D7EE385-53BD-49E3-A7F9-F19D2D61F9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27B7F4DA-6B75-4AE8-8944-40253145A47C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B7F4DA-6B75-4AE8-8944-40253145A47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B7F4DA-6B75-4AE8-8944-40253145A47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B7F4DA-6B75-4AE8-8944-40253145A47C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
